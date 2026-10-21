@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌷 Khu Vườn Hoa Phép Thuật - 20/10</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+* { box-sizing: border-box; }
+
+:root {
+  --pink: #ffb6d5;
+  --purple: #bda5ff;
+  --white: #fffafd;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Quicksand', sans-serif;
+  color: #815b99;
+  background: linear-gradient(135deg, #fff0f7, #f0eaff, #fff8fc);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, #ffffffb0, transparent 28%),
+    radial-gradient(circle at 85% 65%, #e8caff80, transparent 30%);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: auto;
+  padding: 42px 20px 30px;
+  text-align: center;
+}
+
+.tag {
+  display: inline-block;
+  padding: 9px 20px;
+  border: 1px solid #ffffff;
+  border-radius: 30px;
+  background: #ffffff8c;
+  box-shadow: 0 5px 20px #d8b4eb35;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(42px, 8vw, 76px);
+  line-height: 1.15;
+  margin: 22px 0 12px;
+  color: #c36ba7;
+  text-shadow: 2px 4px 15px #e9b9dc80;
+}
+
+.subtitle {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #9174a9;
+}
+
+.names {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px auto;
+  max-width: 720px;
+}
+
+.names span {
+  padding: 9px 15px;
+  border-radius: 25px;
+  background: #ffffffa8;
+  border: 1px solid #fff;
+  box-shadow: 0 4px 15px #d8b4eb30;
+  font-size: 13px;
+  animation: appear 1s both;
+}
+
+.names span:nth-child(2n) {
+  color: #aa70bb;
+  animation-delay: .15s;
+}
+
+.garden {
+  position: relative;
+  height: 255px;
+  max-width: 700px;
+  margin: 20px auto 5px;
+  overflow: hidden;
+  border-radius: 48% 48% 25px 25px;
+  background: linear-gradient(180deg, #ffffff45, #e9d7ff80);
+  border-bottom: 3px solid #c7a8e5;
+}
+
+.garden::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(0deg, #c5e6cb8c, #d5efcf00);
+}
+
+.flower {
+  position: absolute;
+  bottom: 28px;
+  width: 80px;
+  height: 190px;
+  transform-origin: bottom center;
+  animation: sway 3s ease-in-out infinite alternate;
+}
+
+.flower:nth-child(1) { left: 7%; animation-delay: -.4s; }
+.flower:nth-child(2) { left: 23%; animation-delay: -.9s; transform: scale(.85); }
+.flower:nth-child(3) { left: 41%; animation-delay: -.2s; }
+.flower:nth-child(4) { left: 59%; animation-delay: -1.2s; transform: scale(.9); }
+.flower:nth-child(5) { left: 77%; animation-delay: -.7s; }
+
+.stem {
+  position: absolute;
+  bottom: 0;
+  left: 39px;
+  width: 4px;
+  height: 0;
+  border-radius: 5px;
+  background: linear-gradient(#8dcc9c, #549c79);
+  animation: grow 1.2s ease-out forwards;
+}
+
+.leaf {
+  position: absolute;
+  bottom: 48px;
+  left: 40px;
+  width: 25px;
+  height: 12px;
+  background: #8dcc9c;
+  border-radius: 100% 0 100% 0;
+  transform: rotate(-25deg);
+}
+
+.leaf.right {
+  bottom: 78px;
+  left: 20px;
+  transform: scaleX(-1) rotate(-25deg);
+}
+
+.bloom {
+  position: absolute;
+  left: 17px;
+  bottom: 135px;
+  width: 47px;
+  height: 47px;
+  transform: scale(0);
+  animation: bloom 1s cubic-bezier(.2,1.6,.4,1) forwards;
+  animation-delay: .85s;
+}
+
+.petal {
+  position: absolute;
+  left: 13px;
+  top: 0;
+  width: 21px;
+  height: 29px;
+  border-radius: 50% 50% 42% 42%;
+  background: var(--pink);
+  transform-origin: 10px 23px;
+  box-shadow: inset -3px -3px 7px #ce83b633;
+}
+
+.petal:nth-child(2) { transform: rotate(72deg); }
+.petal:nth-child(3) { transform: rotate(144deg); }
+.petal:nth-child(4) { transform: rotate(216deg); }
+.petal:nth-child(5) { transform: rotate(288deg); }
+
+.center {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  width: 15px;
+  height: 15px;
+  background: #ffe99a;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #fff0a0;
+}
+
+.flower:nth-child(2) .petal { background: #d4bcff; }
+.flower:nth-child(3) .petal { background: #ffcee4; }
+.flower:nth-child(4) .petal { background: #fff; }
+.flower:nth-child(5) .petal { background: #cbb7ff; }
+
+@keyframes grow {
+  to { height: 155px; }
+}
+
+@keyframes bloom {
+  to { transform: scale(1); }
+}
+
+@keyframes sway {
+  from { rotate: -5deg; }
+  to { rotate: 5deg; }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button {
+  position: relative;
+  z-index: 2;
+  margin: 22px auto;
+  padding: 15px 29px;
+  border: 0;
+  border-radius: 35px;
+  color: white;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  background: linear-gradient(110deg, #ed93c4, #b79aff);
+  box-shadow: 0 8px 25px #c9a1df80;
+  transition: transform .25s, box-shadow .25s;
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px #c9a1dfaa;
+}
+
+button:active { transform: scale(.97); }
+
+#wish {
+  display: none;
+  max-width: 650px;
+  margin: 10px auto 25px;
+  padding: 25px;
+  border: 1px solid white;
+  border-radius: 25px;
+  background: #ffffffbb;
+  box-shadow: 0 8px 35px #c7a5e933;
+  line-height: 1.9;
+  animation: appear .7s both;
+}
+
+#wish h2 {
+  margin-top: 0;
+  font-family: 'Dancing Script', cursive;
+  font-size: 34px;
+  color: #c36ba7;
+}
+
+#wish p { margin: 10px 0; }
+
+.signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 25px;
+  color: #bb78b4;
+}
+
+.footer {
+  margin-top: 24px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #a88db9;
+}
+
+.particle {
+  position: fixed;
+  top: -30px;
+  z-index: 5;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translate(0, -5vh) rotate(0deg); opacity: 0; }
+  10% { opacity: .9; }
+  100% { transform: translate(var(--drift), 110vh) rotate(650deg); opacity: 0; }
+}
+
+.sparkle {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  color: white;
+  text-shadow: 0 0 8px #c9a1ff, 0 0 18px #eab8e9;
+  animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .2; transform: scale(.7); }
+  to { opacity: 1; transform: scale(1.3); }
+}
+
+@media (max-width: 480px) {
+  .container { padding-top: 30px; }
+  .garden { height: 215px; }
+  .flower { transform: scale(.75); }
+  .flower:nth-child(2), .flower:nth-child(4) { transform: scale(.65); }
+  .names { gap: 7px; }
+  .names span { padding: 8px 11px; }
+  #wish { padding: 20px 16px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="tag">✧ 20 . 10 . 2026 ✧</div>
+
+  <h1>Khu Vườn Hoa Phép Thuật</h1>
+
+  <div class="subtitle">
+    Gửi những bông hoa xinh đẹp nhất của tổ mình 💗<br>
+    Chúc các cậu một ngày ngập tràn yêu thương!
+  </div>
+
+  <div class="names">
+    <span>🌷 Ngọc Trâm</span>
+    <span>🪻 Như Hằng</span>
+    <span>🌸 Như Ý</span>
+    <span>💐 Quỳnh Như</span>
+    <span>🌹 Kim Chi</span>
+    <span>🌼 Thu Huyền</span>
+    <span>🦋 Quỳnh Hương</span>
+  </div>
+
+  <div class="garden" id="garden">
+    <div class="flower">
+      <div class="stem"><div class="leaf"></div><div class="leaf right"></div></div>
+      <div class="bloom">
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="center"></div>
+      </div>
+    </div>
+
+    <div class="flower">
+      <div class="stem"><div class="leaf"></div><div class="leaf right"></div></div>
+      <div class="bloom">
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="center"></div>
+      </div>
+    </div>
+
+    <div class="flower">
+      <div class="stem"><div class="leaf"></div><div class="leaf right"></div></div>
+      <div class="bloom">
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="center"></div>
+      </div>
+    </div>
+
+    <div class="flower">
+      <div class="stem"><div class="leaf"></div><div class="leaf right"></div></div>
+      <div class="bloom">
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="center"></div>
+      </div>
+    </div>
+
+    <div class="flower">
+      <div class="stem"><div class="leaf"></div><div class="leaf right"></div></div>
+      <div class="bloom">
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="petal"></div>
+        <div class="petal"></div><div class="center"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-family:'Dancing Script';font-size:25px;color:#bb83ca">
+    Một đóa hoa cho cậu, một phép màu cho ngày hôm nay ✨
+  </div>
+
+  <button onclick="sendWish()">💌 Gửi một điều ước</button>
+
+  <div id="wish">
+    <h2>Chúc mừng ngày 20/10! 🌸</h2>
+    <p id="wishText"></p>
+    <p class="signature">Luôn xinh đẹp và rạng rỡ nhé! 💕</p>
+  </div>
+
+  <div class="footer">
+    MADE WITH ♡ FOR THE GIRLS OF OUR TEAM
+    <p>🌷 Mong mọi điều dịu dàng nhất sẽ đến với các cậu 🌷</p>
+  </div>
+</div>
+
+<script>
+const wishes = [
+  "Chúc Ngọc Trâm, Như Hằng, Như Ý, Quỳnh Như, Kim Chi, Thu Huyền và Quỳnh Hương luôn xinh đẹp, vui vẻ, học giỏi và gặp thật nhiều may mắn. Mong mỗi ngày của các cậu đều ngọt ngào như một vườn hoa mùa xuân! 🌷",
+
+  "Gửi 7 nàng thơ của tổ mình! 💗 Chúc các cậu luôn tự tin, yêu đời, cười thật nhiều và đạt được mọi điều mình mong muốn. Mong thanh xuân của chúng ta có thật nhiều kỷ niệm đẹp và chẳng thiếu những ngày hạnh phúc! 🦋",
+
+  "Điều ước đặc biệt dành cho các cậu: luôn có người yêu thương, có bạn bè đồng hành, có ước mơ để theo đuổi và có đủ dũng khí để tỏa sáng theo cách riêng của mình. Chúc 20/10 thật lung linh nhé! ✨",
+
+  "Chúc các cô gái của tổ mình học hành thuận lợi, điểm số rực rỡ, tiền vào như nước, niềm vui đầy túi và nỗi buồn tự động biến mất! Mãi là những bông hoa xinh đẹp, độc nhất vô nhị nhé! 🌸",
+
+  "Mong rằng 365 ngày trong năm của các cậu đều là ngày được trân trọng, được yêu thương và được sống thật vui. Chúc 7 bông hoa luôn nở rộ theo cách của riêng mình, vì các cậu xứng đáng với tất cả những điều tuyệt vời nhất! 💐"
+];
+
+let lastWish = -1;
+
+function sendWish() {
+  let index;
+  do {
+    index = Math.floor(Math.random() * wishes.length);
+  } while (index === lastWish && wishes.length > 1);
+
+  lastWish = index;
+  document.getElementById("wishText").textContent = wishes[index];
+
+  const card = document.getElementById("wish");
+  card.style.display = "block";
+  card.style.animation = "none";
+  void card.offsetWidth;
+  card.style.animation = "appear .7s both";
+
+  card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  createPetals(35);
+}
+
+// Cánh hoa bay ngẫu nhiên khắp màn hình
+function createPetals(number) {
+  const symbols = ["🌸", "🌷", "💗", "✨", "🪻", "♡"];
+
+  for (let i = 0; i < number; i++) {
+    const petal = document.createElement("div");
+    petal.className = "particle";
+    petal.textContent = symbols[
+      Math.floor(Math.random() * symbols.length)
+    ];
+
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.fontSize = (12 + Math.random() * 20) + "px";
+    petal.style.animationDuration = (4 + Math.random() * 5) + "s";
+    petal.style.animationDelay = (Math.random() * 1.5) + "s";
+    petal.style.setProperty(
+      "--drift",
+      (Math.random() * 240 - 120) + "px"
+    );
+
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 11000);
+  }
+}
+
+// Ánh sáng lấp lánh
+function createSparkles() {
+  for (let i = 0; i < 24; i++) {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.textContent = "✦";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.top = Math.random() * 100 + "vh";
+    s.style.fontSize = (8 + Math.random() * 12) + "px";
+    s.style.animationDelay = Math.random() * 2 + "s";
+    document.body.appendChild(s);
+  }
+}
+
+window.addEventListener("load", () => {
+  createSparkles();
+  setTimeout(() => createPetals(16), 800);
+});
+</script>
+</body>
+</html>
